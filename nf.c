@@ -23,8 +23,12 @@ int packet_count = 0;
 int main(int argc, char **argv) {
 	int ch;
 	
-	while((ch = getopt(argc, argv, "n:r:")) != -1){
+	while((ch = getopt(argc, argv, "n:r:h")) != -1){
 		switch(ch){
+			case 'h':
+				printf("usage: -h              show this message;\n");
+				printf("       -n QUEUE_NUM    specify the queue num to bind to. default is 0.\n");
+				exit(0);
 			case 'n':
 				sscanf(optarg, "%d", &queue_num);
 				printf("get command line option: -%c %d\n", ch, queue_num);
@@ -42,7 +46,7 @@ int main(int argc, char **argv) {
 				}
 				break;
 			default:
-				printf("unknown option: %c\n", ch);
+				printf("unknown option: %c. use -h to see usage.\n", ch);
 				exit(1);
 		}
 	}
